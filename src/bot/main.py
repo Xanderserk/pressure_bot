@@ -49,7 +49,7 @@ async def echo_handler(message: Message) -> None:
             print(results)
             client = APIClient()
             measurements = [
-                {'up': r[0], 'down': r[1], 'pulse': r[2] if len(r) > 1 + 1 else 0}
+                {'up': int(r[0]), 'down': int(r[1]), 'pulse': int(r[2]) if r[2] else 0}
                 for r in results
             ]
             print(measurements)
