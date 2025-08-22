@@ -1,0 +1,60 @@
+[project]
+name = "bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "loki", email = "gunlinux@ya.ru" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "aiogram>=3.22.0",
+    "dotenv>=0.9.9",
+]
+
+[project.scripts]
+bot = "bot.main:run"
+
+[build-system]
+requires = ["uv_build>=0.8.12,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.ruff.lint]
+# 1. Enable flake8-bugbear (`B`) rules, in addition to the defaults.
+select = ["ALL"]
+
+# 2. Avoid enforcing line-length violations (`E501`)
+ignore = ["E501", "Q000", "D", "DTZ005", "SIM117", "ANN", "I001", "S101", "T201", "COM812", "Q003", "EM101"]
+
+# 3. Avoid trying to fix flake8-bugbear (`B`) violations.
+unfixable = ["B"]
+
+# 4. Ignore `E402` (import violations) in all `__init__.py` files, and in selected subdirectories.
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402"]
+
+[tool.ruff.format]
+# 5. Use single quotes in `ruff format`.
+quote-style = "single"
+
+[tool.mypy]
+warn_return_any = false
+warn_unused_configs = false
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.pyright]
+ignore = ["tests"]
+reportOptionalCall = false
+reportUnusedCallResult = false
+# вернуть
+reportUnannotatedClassAttribute = false
+reportExplicitAny = false
+reportAny = false
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.404",
+    "ruff>=0.12.10",
+]
