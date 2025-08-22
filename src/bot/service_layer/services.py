@@ -17,14 +17,17 @@ class APIClient:
         response.raise_for_status()
         return response.json()
 
-    async def create_user(self, user_data: dict[str, Any]) -> dict[str, Any]:
-        response = await self.client.post(f'{self.base_url}/users/', json=user_data)
+    async def create_user(self, user_id: int, telegram_nickname: str) -> dict[str, Any]:
+        response = await self.client.post(
+            f'{self.base_url}/users/',
+            json={'id': user_id, 'telegram_nickname': telegram_nickname},
+        )
         response.raise_for_status()
         return response.json()
 
     async def create_pressure_measurements_for_user(
-        self, user_id: int, pressure_data: dict[str, Any]
-    ) -> dict[str, Any]:
+        self, user_id: int, pressure_data: list[dict[str, Any]]
+    ) -> list[dict[str, Any]]:
         response = await self.client.post(
             f'{self.base_url}/users/{user_id}/pressure/', json=pressure_data
         )

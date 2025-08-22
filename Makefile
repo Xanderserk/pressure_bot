@@ -9,7 +9,7 @@ format:
 	uvx ruff format --check .
 
 tests:
-	uv run pytest
+	uv run pytest -vv
 
 type-check:
 	uv run pyright .
