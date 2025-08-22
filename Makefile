@@ -1,6 +1,6 @@
 .PHONY: check lint format type-check lock tests
 
-check: lint format type-check lock
+check: lint format type-check lock tests
 
 lint:
 	uvx ruff check .
